@@ -5,6 +5,6 @@
 build
 build_*
 package*
-lib
+# lib
 temp
 tmp
