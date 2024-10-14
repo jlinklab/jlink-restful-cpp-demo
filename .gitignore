@@ -1,0 +1,10 @@
+
+*.user
+*.filter
+.vs
+build
+build_*
+package*
+lib
+temp
+tmp
