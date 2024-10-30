@@ -37,19 +37,41 @@ target_include_directories(
     ../third/curl/include
     ../third/fmt/include
     ../third/openssl/include
+    ../third/mqtt/include
 )
 
 # 目标依赖库搜索路径
-target_link_directories(
-    ${PROJECT_NAME} PUBLIC
-    ../third/curl/lib
-    ../third/fmt/lib
-    ../third/openssl/lib
-)
+if (MSVC)
+    target_link_directories(
+        ${PROJECT_NAME} PUBLIC
+        ../third/curl/lib/windows
+        ../third/fmt/lib/windows
+        ../third/openssl/lib/windows
+        ../third/mqtt/lib/windows
+    )
+else()
+    target_link_directories(
+        ${PROJECT_NAME} PUBLIC
+        ../third/curl/lib/linux
+        ../third/fmt/lib/linux
+        ../third/openssl/lib/linux
+        ../third/mqtt/lib/linux
+    )
+endif()
 
 # 目标依赖库
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
+    $<$<PLATFORM_ID:Linux>:curl>
+    $<$<PLATFORM_ID:Linux>:fmt>
+    $<$<PLATFORM_ID:Linux>:paho-mqtt3cs>
+    $<$<PLATFORM_ID:Linux>:crypto>
+    $<$<PLATFORM_ID:Linux>:ssl>
+    $<$<PLATFORM_ID:Linux>:crypto>
+    $<$<PLATFORM_ID:Linux>:dl>
+    $<$<PLATFORM_ID:Linux>:pthread>
+    $<$<PLATFORM_ID:Linux>:z>
+    $<$<PLATFORM_ID:Windows>:paho-mqtt3cs-static>
     $<$<PLATFORM_ID:Windows>:fmt_static>
     $<$<PLATFORM_ID:Windows>:libcurl_static>
     $<$<PLATFORM_ID:Windows>:ws2_32>

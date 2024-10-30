@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="头文件\response">
+      <UniqueIdentifier>{dc23f6b3-b71d-415e-a70f-e5b7be6adee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\ams_user">
+      <UniqueIdentifier>{0e431dd5-9d20-4178-b52a-9bea6a5d45ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\add_device">
+      <UniqueIdentifier>{efe62f08-0eaf-4d8c-8fa3-dc47d5c7f258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_config">
+      <UniqueIdentifier>{7661be4f-8bf0-47fd-9c07-9fc53c8be256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_control">
+      <UniqueIdentifier>{98e6cb8d-56d3-420a-b45d-97b94912e124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_status">
+      <UniqueIdentifier>{0b7dcda1-48c6-4ad1-92c0-952288bab437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_token_manager">
+      <UniqueIdentifier>{e30d0d61-8a50-421b-9dc6-f66b2f4d6f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\firmware_upgrade">
+      <UniqueIdentifier>{03d74993-3a81-4c07-8f72-4849252981b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\get_deviceinfo">
+      <UniqueIdentifier>{8069be60-2ebe-42cb-ae8b-5462d7b44cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\get_systemability">
+      <UniqueIdentifier>{07d88492-d4c8-4591-a81c-29266c930b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\media_server">
+      <UniqueIdentifier>{02b3f59f-7244-401e-8b47-d63fb248ce7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\PTZcontrol">
+      <UniqueIdentifier>{98e99939-2c1d-4a93-8aba-b7d5f7dd70f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_config\basic_param">
+      <UniqueIdentifier>{f82b091a-b662-43fe-9e4c-24d8466efd56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_config\device_channel">
+      <UniqueIdentifier>{879d9be6-1ebc-4c0f-b581-6319f98513da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_config\device_general">
+      <UniqueIdentifier>{faadf518-9561-4b68-ab4f-9996283bae17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_config\external_ptz">
+      <UniqueIdentifier>{dabc2ff4-c91c-4725-8766-09e715ecc329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_config\net_basic">
+      <UniqueIdentifier>{f87c8c12-658a-4d85-b75e-387921a944e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\message">
+      <UniqueIdentifier>{205b4641-4af4-4294-9bd2-12ae0ee687e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request">
+      <UniqueIdentifier>{477507de-09f2-46e1-9d01-be6c54344d5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\device_control">
+      <UniqueIdentifier>{8d61674c-0332-480a-9548-6075d9515692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\firmware_upgrade">
+      <UniqueIdentifier>{58a0d46f-89d7-4024-927b-d6b0226f9db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\media_server">
+      <UniqueIdentifier>{ce0e6662-ad3e-4e58-996d-d7a5d9853ba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\media_server\cloud_recorde">
+      <UniqueIdentifier>{8d38bc76-2e9b-4737-9c51-53d519a9cc2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\media_server\local_recorde">
+      <UniqueIdentifier>{9a5e3690-769b-4f16-a4d5-aacc8c4295a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\PTZ_control">
+      <UniqueIdentifier>{69132825-d0cf-4037-9519-b97999023017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\set_device_conf">
+      <UniqueIdentifier>{572ffefe-e89e-435e-a7c1-74879b6eb120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\request\user_account">
+      <UniqueIdentifier>{d98e9355-c3ff-4b45-9b87-b97a5ee8fb4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_control\log_manage">
+      <UniqueIdentifier>{afae0850-0861-4615-9bc5-b9297f1fefd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_control\storage_manage">
+      <UniqueIdentifier>{6e0a5719-d46f-48cc-bffa-7a435de70d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\device_control\trans">
+      <UniqueIdentifier>{42b6b7a9-efb5-4c43-b3bd-94eccdf8075d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\media_server\cloud_recorde">
+      <UniqueIdentifier>{e1522ac3-70f4-404b-997c-78b4df92e839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\media_server\cloud_recorde\cloud_storage_control">
+      <UniqueIdentifier>{959b7d40-7a5c-4dc0-8935-8559e58ae72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\media_server\live_preview">
+      <UniqueIdentifier>{ce2f6bf7-a2a3-4b15-91f9-f93aed2ae129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\response\media_server\local_recorde">
+      <UniqueIdentifier>{15d7b9e9-e22b-4d38-9fa6-3411c81075d7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\const.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\jlink_mqtt_subscriber_internal.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utils.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\response.h">
+      <Filter>头文件\response</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\add_device\device_list_response.h">
+      <Filter>头文件\response\add_device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\add_device\null_response.h">
+      <Filter>头文件\response\add_device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_info_response.h">
+      <Filter>头文件\response\ams_user</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_login_response.h">
+      <Filter>头文件\response\ams_user</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_modifypassunlog_response.h">
+      <Filter>头文件\response\ams_user</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_add_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_alarm_info_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_delect_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_del_share_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_family_group_del_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_invite_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_passthrough_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_reset_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_status_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_update_token_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_userdel_report_message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\message.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_custom_protocol_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_log_query_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_open_close_trans_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_restart_shutdown_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_restore_factory_setting_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_storage_formatting_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_syn_system_time_query_resquest.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_syn_utc_request.h">
+      <Filter>头文件\request\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\firmware_upgrade\device_check_firmware_ver_request.h">
+      <Filter>头文件\request\firmware_upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\firmware_upgrade\device_upgrade_firmware_request.h">
+      <Filter>头文件\request\firmware_upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\local_recorde\device_osp_calendar_request.h">
+      <Filter>头文件\request\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\local_recorde\device_playback_address_request.h">
+      <Filter>头文件\request\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\local_recorde\device_recorde_list_request.h">
+      <Filter>头文件\request\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\cloud_recorde\device_cloud_storage_alarm_recorde_request.h">
+      <Filter>头文件\request\media_server\cloud_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\cloud_recorde\device_cloud_storage_alarm_video_request.h">
+      <Filter>头文件\request\media_server\cloud_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\cloud_recorde\device_get_alarm_video_info_request.h">
+      <Filter>头文件\request\media_server\cloud_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_close_livestream_request.h">
+      <Filter>头文件\request\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_livestream_address_request.h">
+      <Filter>头文件\request\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_snap_request.h">
+      <Filter>头文件\request\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_talkback_request.h">
+      <Filter>头文件\request\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_videotalk_request.h">
+      <Filter>头文件\request\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_direction_control_request.h">
+      <Filter>头文件\request\PTZ_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_get_cruise_request.h">
+      <Filter>头文件\request\PTZ_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_get_preset_conf_request.h">
+      <Filter>头文件\request\PTZ_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_point_cruise_request.h">
+      <Filter>头文件\request\PTZ_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_ptz_preset_request.h">
+      <Filter>头文件\request\PTZ_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_zoom_focus_request.h">
+      <Filter>头文件\request\PTZ_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_camera_param_conf_request.h">
+      <Filter>头文件\request\set_device_conf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_chnnel_title_conf_request.h">
+      <Filter>头文件\request\set_device_conf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_external_ptz_conf_request.h">
+      <Filter>头文件\request\set_device_conf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_general_conf_request.h">
+      <Filter>头文件\request\set_device_conf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_net_basic_conf_request.h">
+      <Filter>头文件\request\set_device_conf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_modify_pass_request.h">
+      <Filter>头文件\request\user_account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_modify_pass_unlogin_request.h">
+      <Filter>头文件\request\user_account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_phonereg_request.h">
+      <Filter>头文件\request\user_account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_send_captcha_request.h">
+      <Filter>头文件\request\user_account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_userlogin_request.h">
+      <Filter>头文件\request\user_account</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\log_manage\device_clear_log_response.h">
+      <Filter>头文件\response\device_control\log_manage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\log_manage\device_log_query_response.h">
+      <Filter>头文件\response\device_control\log_manage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\storage_manage\device_storage_formatting_response.h">
+      <Filter>头文件\response\device_control\storage_manage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\storage_manage\device_storage_info_response.h">
+      <Filter>头文件\response\device_control\storage_manage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\trans\device_custom_protocol_response.h">
+      <Filter>头文件\response\device_control\trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\trans\device_open_close_trans_response.h">
+      <Filter>头文件\response\device_control\trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_restart_shutdown_response.h">
+      <Filter>头文件\response\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_restore_factory_setting_response.h">
+      <Filter>头文件\response\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_syn_system_time_response.h">
+      <Filter>头文件\response\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_syn_utc_response.h">
+      <Filter>头文件\response\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_system_time_query_response.h">
+      <Filter>头文件\response\device_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_alive_response.h">
+      <Filter>头文件\response\device_status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_login_response.h">
+      <Filter>头文件\response\device_status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_logout_response.h">
+      <Filter>头文件\response\device_status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_status_response.h">
+      <Filter>头文件\response\device_status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_systeminfo_response.h">
+      <Filter>头文件\response\device_status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_token_manager\device_token_response.h">
+      <Filter>头文件\response\device_token_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\firmware_upgrade\device_check_firmware_versions_response.h">
+      <Filter>头文件\response\firmware_upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\firmware_upgrade\device_get_upgrade_progress_response.h">
+      <Filter>头文件\response\firmware_upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\firmware_upgrade\device_upgrade_firmware_response.h">
+      <Filter>头文件\response\firmware_upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_deviceinfo\device_get_4Ginfo_response.h">
+      <Filter>头文件\response\get_deviceinfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_deviceinfo\device_RTMP_all_info_response.h">
+      <Filter>头文件\response\get_deviceinfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_blindcap_ability_response.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_camera_parm_ablity_response.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_Intelligent_ability.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_language_ability_response.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_motion_area_ablity_response.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_support_extren_record_ability_response.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_talkaudio_format_ablity_response.h">
+      <Filter>头文件\response\get_systemability</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\cloud_storage_control\device_cloud_storage_response.h">
+      <Filter>头文件\response\media_server\cloud_recorde\cloud_storage_control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\device_cloud_storage_alarm_recorde_response.h">
+      <Filter>头文件\response\media_server\cloud_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\device_cloud_storage_alarm_video_response.h">
+      <Filter>头文件\response\media_server\cloud_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\device_get_alarm_video_info_response.h">
+      <Filter>头文件\response\media_server\cloud_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\live_preview\device_close_livestream_response.h">
+      <Filter>头文件\response\media_server\live_preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\live_preview\device_livestream_address_response.h">
+      <Filter>头文件\response\media_server\live_preview</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_osp_calendar_response.h">
+      <Filter>头文件\response\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_playback_address_response.h">
+      <Filter>头文件\response\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_recorde_list_response.h">
+      <Filter>头文件\response\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_switch_stream_response.h">
+      <Filter>头文件\response\media_server\local_recorde</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_connect_num_response.h">
+      <Filter>头文件\response\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_snap_response.h">
+      <Filter>头文件\response\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_talkback_response.h">
+      <Filter>头文件\response\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_videotalk_response.h">
+      <Filter>头文件\response\media_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_direction_control_response.h">
+      <Filter>头文件\response\PTZcontrol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_get_cruise_response.h">
+      <Filter>头文件\response\PTZcontrol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_get_preset_conf_response.h">
+      <Filter>头文件\response\PTZcontrol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_point_cruise_response.h">
+      <Filter>头文件\response\PTZcontrol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_ptz_preset_response.h">
+      <Filter>头文件\response\PTZcontrol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_zoom_focus_response.h">
+      <Filter>头文件\response\PTZcontrol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\developer_info.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_developer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_device.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_mqtt_subscriber.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\mqtt_conn_options.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\mqtt_listener.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\request.h">
+      <Filter>头文件\request</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\basic_param\device_get_camera_param_conf_response.h">
+      <Filter>头文件\response\device_config\basic_param</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\basic_param\device_set_camera_param_conf_response.h">
+      <Filter>头文件\response\device_config\basic_param</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_channel\device_get_chnnel_title_conf_response.h">
+      <Filter>头文件\response\device_config\device_channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_channel\device_set_chnnel_title_conf_response.h">
+      <Filter>头文件\response\device_config\device_channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_general\device_get_general_conf_response.h">
+      <Filter>头文件\response\device_config\device_general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_general\device_set_general_conf_response.h">
+      <Filter>头文件\response\device_config\device_general</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\external_ptz\device_get_external_ptz_conf_response.h">
+      <Filter>头文件\response\device_config\external_ptz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\external_ptz\device_set_external_ptz_conf_response.h">
+      <Filter>头文件\response\device_config\external_ptz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\net_basic\device_get_net_basic_conf_response.h">
+      <Filter>头文件\response\device_config\net_basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\net_basic\device_set_net_basic_conf_response.h">
+      <Filter>头文件\response\device_config\net_basic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\jlink_client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\jlink_developer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\jlink_device.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\jlink_mqtt_subscriber.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\jlink_mqtt_subscriber_internal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

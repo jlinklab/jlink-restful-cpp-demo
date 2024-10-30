@@ -1,7 +1,38 @@
 ﻿#pragma once
 
-const char* GWP_URL = "https://api.jftechws.com/gwp/v3/rtc";
-
-const char* DEV_BIND_URL = "/device/bind";
-const char* DEV_UNBIND_URL = "/device/unbind/";
-const char* DEV_LIST_URL = "/device/list";
+// static const char* GWP_URL = "https://api-as-th.jftechws.com/gwp/v3/rtc"; // 泰国
+static const char* GWP_URL = "https://api.jftechws.com/gwp/v3/rtc";
+static const char* AMS_URL = "https://api.jftechws.com/ams";
+static const char* DEV_BIND_URL = "/device/bind";
+static const char* DEV_UNBIND_URL = "/device/unbind";
+static const char* DEV_TOKEN_URL = "/device/token";
+static const char* DEV_LIST_URL = "/device/list";
+static const char* DEV_STATUS_URL = "/device/status";
+static const char* DEV_LOGIN_URL = "/device/login";
+static const char* DEV_ALIVE_URL = "/device/keepalive";
+static const char* DEV_LOGOUT_URL = "/device/logout";
+static const char* DEV_GETINFO_URL = "/device/getinfo";
+static const char* DEV_ABILITY_URL = "/device/getability";
+static const char* DEV_GETCONF_URL = "/device/getconfig";
+static const char* DEV_SETCONF_URL = "/device/setconfig";
+static const char* DEV_OPDEV_URL = "/device/opdev";
+static const char* DEV_LIVESTREAM_URL = "/device/livestream";
+static const char* DEV_CLOSE_LIVESTREAM_URL = "/device/closeLivestream";
+static const char* DEV_TALKBACK_URL = "/device/talkbackUrl";
+static const char* DEV_VEDIOTALK_URL = "/device/getVideoCallUrl";
+static const char* DEV_CAPTURE_URL = "/device/capture";
+static const char* DEV_GET_PULL_STREAM_CONNECTIONS_COUNT_URL = "/device/getPullStreamConnectionsCount";
+static const char* DEV_PLAYBACK_URL = "/device/playbackUrl";
+static const char* DEV_CARD_VIDEO_SWITCHS_TREAM_URL = "/device/cardVideoSwitchStream";
+static const char* DEV_CARD_PLAYBACK_CALENDAR_URL = "/device/cardPlaybackCalendar";
+static const char* DEV_GETVIDEOLIST_URL = "/device/getVideoList";
+static const char* DEV_GETVIDEO_URL = "/device/getVideoUrl";
+static const char* DEV_GET_ALARM_VIDEO_INFO_URL = "/device/getAlarmVideoInfo";
+static const char* DEV_CLOUD_VIDEO_RECORDING_SWITCH_URL = "/device/cloudVideoRecordingSwitch";
+static const char* DEV_GET_PIC_URL = "/device/getPicUrl";
+static const char* DEVELOP_SEND_CAPTCHA_URL = "scphone/v1";
+static const char* DEVELOP_USER_REG_PHONE_URL = "userregPhone/v1";
+static const char* DEVELOP_USER_LOGIN_URL = "login/va1";
+static const char* DEVELOP_USER_INFO_URL = "userinfo2/v1";
+static const char* DEVELOP_MODIFY_PASS_URL = "fpphone/v1";
+static const char* DEVELOP_MODIFY_PASS_UNLOGIN_URL = "usercpc/va1";
