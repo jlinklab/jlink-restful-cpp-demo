@@ -8,3 +8,4 @@ package*
 # lib
 temp
 tmp
+/include/jlink-restful-cpp/response/questions.txt

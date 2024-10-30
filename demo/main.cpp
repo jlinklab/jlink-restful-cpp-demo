@@ -1,29 +1,62 @@
-﻿#include "jlink_client.h"
-#include "jlink_device.h"
+﻿#include <fstream>
 #include "fmt/core.h"
+#include "tools.h"
+#include "request/request.h"
+#include "mqttmessage.h"
 
 int main()
 {
-    // developer params obtained from (open.jftech.com)
-    std::string uuid = "e0534f3240274897821a126be19b6d46";
-    std::string app_key = "0621ef206a1d4cafbe0c5545c3882ea8";
-    std::string app_secret = "90f8bc17be2a425db6068c749dee4f5d";
-    int movecard = 2;
+    Params params;
+    getParams(params);
 
-    // dev_sn is device serial number
-    std::string dev_sn = "";
-    std::string dev_user_name = "";
-    std::string dev_password = "";
+    DeveloperInfo developerInfo;
+    developerInfo.app_key = params._app_key;
+    developerInfo.app_secret = params._app_secret;
+    developerInfo.movecard = params._movecard;
+    developerInfo.uuid = params._uuid;
+
+    JLinkClient client(developerInfo);
+    JLinkDevice device(&client, params._dev_sn, params._dev_user_name, params._dev_password);
+    JLinkDeveloper developer(&client, developerInfo);
+    JLinkMqttSubscriber mqttsubscriber(developerInfo);
+
+    mainMenu(client, device, developer);
+
+#if 0
+    // mqtt订阅
+    device.getDeviceToken();
+    device.deviceLogin();
+
+    UserLoginInfo userLoginInfo;
+    userLoginInfo.account = "********";
+    userLoginInfo.password = "*********";
+    auto resp_0 = developer.userLogin(userLoginInfo);
+    auto resp_1 = developer.userInfo();
+
+    MyMqttListener mqttListener;
+    MqttConnectOptions connectOptions(resp_1.data.userId, resp_0.data.access_token);
+
+    mqttsubscriber.setCallback(&mqttListener);
+    while (true) {
+        if (!mqttsubscriber.connect("mqtt://jfmq-v2.xmcsrv.net:1883", connectOptions)) {
+            std::cout << "连接成功" << std::endl;
+
+            mqttsubscriber.subscribeDeviceStatus_client(device._dev_token, 0);
+            mqttsubscriber.deviceAlarmInfo_client(device._dev_token, 0);
+            //mqttsubscriber.devicePassThrough_client(device._dev_token, 0);
+            //mqttsubscriber.deviceInfoReport_client(device._dev_token, 0);
+            break;
+
+        } else {
+            std::cout << "连接失败，尝试重新连接" << std::endl;
+        }
+    }
+
+    while (true) {
+        Sleep(1000);
+    }
     
-    JLinkClient client(uuid, app_key, app_secret, movecard);
-    JLinkDevice device(&client, dev_sn, dev_user_name, dev_password);
-    
-    auto resp_0 = device.deviceBind();
-    auto resp_1 = device.getDeviceList();
-
-    fmt::println("{}, {}, {}", resp_1.code, resp_1.msg, resp_1.data.size());
-
-    auto resp_2 = device.deviceUnBind();
+#endif
 
     return 0;
 }

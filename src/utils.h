@@ -1,15 +1,17 @@
 ﻿#pragma once
-
 #include <string>
+#include "jlink_client.h"
+#include "jlink_device.h"
+#include "jlink_developer.h"
+#include "fmt/core.h"
 
-namespace utils {
+namespace utils
+{
 
 std::string getTimeStamp();
 
-std::string getSignature(const std::string& uuid, 
-                         const std::string& app_key, 
-                         const std::string& app_secret, 
-                         const std::string& timestamp,
-                         int movecard);
+std::string getSignature(const DeveloperInfo& developer_info, const std::string& timestamp);
 
-}
+std::string AESEncode(const std::string& ori_data, const DeveloperInfo& developer_info, const std::string& timestamp);
+
+} // namespace utils

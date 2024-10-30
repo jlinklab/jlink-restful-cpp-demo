@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9e448448-d6ad-4398-9bfc-825b1fee7876}</ProjectGuid>
+    <RootNamespace>jlinkrestfulcppdemo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../include/jlink-restful-cpp;../../third/curl/include;../../third/fmt/include;../../third/openssl/include;../../third/mqtt/include;../../third/json;../../third;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../third/curl/lib;../../third/fmt/lib;../../third/mqtt/lib;../../third/openssl/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurl_static.lib;fmt_static.lib;paho-mqtt3cs-static.lib;libcrypto_static.lib;libssl_static.lib;ws2_32.lib;Crypt32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\developer_info.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_client.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_developer.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_device.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\jlink_mqtt_subscriber.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_add_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_alarm_info_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_delect_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_del_share_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_family_group_del_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_invite_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_passthrough_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_reset_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_status_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_update_token_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_userdel_report_message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\message\message.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\mqtt_conn_options.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\mqtt_listener.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_custom_protocol_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_log_query_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_open_close_trans_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_restart_shutdown_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_restore_factory_setting_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_storage_formatting_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_syn_system_time_query_resquest.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\device_control\device_syn_utc_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\firmware_upgrade\device_check_firmware_ver_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\firmware_upgrade\device_upgrade_firmware_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\cloud_recorde\device_cloud_storage_alarm_recorde_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\cloud_recorde\device_cloud_storage_alarm_video_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\cloud_recorde\device_get_alarm_video_info_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_close_livestream_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_livestream_address_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_snap_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_talkback_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\device_videotalk_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\local_recorde\device_osp_calendar_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\local_recorde\device_playback_address_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\media_server\local_recorde\device_recorde_list_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_direction_control_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_get_cruise_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_get_preset_conf_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_point_cruise_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_ptz_preset_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\PTZ_control\device_zoom_focus_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_camera_param_conf_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_chnnel_title_conf_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_external_ptz_conf_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_general_conf_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\set_device_conf\device_set_net_basic_conf_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_modify_pass_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_modify_pass_unlogin_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_phonereg_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_send_captcha_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\request\user_account\developer_userlogin_request.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\add_device\device_list_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\add_device\null_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_info_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_login_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_modifypassunlog_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\basic_param\device_get_camera_param_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\basic_param\device_set_camera_param_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_channel\device_get_chnnel_title_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_channel\device_set_chnnel_title_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_general\device_get_general_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_general\device_set_general_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\external_ptz\device_get_external_ptz_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\external_ptz\device_set_external_ptz_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\net_basic\device_get_net_basic_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\net_basic\device_set_net_basic_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_restart_shutdown_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_restore_factory_setting_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_syn_system_time_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_syn_utc_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\device_system_time_query_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\log_manage\device_clear_log_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\log_manage\device_log_query_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\storage_manage\device_storage_formatting_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\storage_manage\device_storage_info_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\trans\device_custom_protocol_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_control\trans\device_open_close_trans_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_alive_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_login_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_logout_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_status_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_status\device_systeminfo_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_token_manager\device_token_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\firmware_upgrade\device_check_firmware_versions_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\firmware_upgrade\device_get_upgrade_progress_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\firmware_upgrade\device_upgrade_firmware_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_deviceinfo\device_get_4Ginfo_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_deviceinfo\device_RTMP_all_info_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_blindcap_ability_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_camera_parm_ablity_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_Intelligent_ability.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_language_ability_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_motion_area_ablity_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_support_extren_record_ability_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\get_systemability\device_talkaudio_format_ablity_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\cloud_storage_control\device_cloud_storage_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\device_cloud_storage_alarm_recorde_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\device_cloud_storage_alarm_video_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\cloud_recorde\device_get_alarm_video_info_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_connect_num_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_snap_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_talkback_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\device_videotalk_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\live_preview\device_close_livestream_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\live_preview\device_livestream_address_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_osp_calendar_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_playback_address_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_recorde_list_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\media_server\local_recorde\device_switch_stream_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_direction_control_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_get_cruise_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_get_preset_conf_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_point_cruise_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_ptz_preset_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\PTZcontrol\device_zoom_focus_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\response.h" />
+    <ClInclude Include="..\..\src\const.h" />
+    <ClInclude Include="..\..\src\jlink_mqtt_subscriber_internal.h" />
+    <ClInclude Include="..\..\src\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\jlink_client.cpp" />
+    <ClCompile Include="..\..\src\jlink_developer.cpp" />
+    <ClCompile Include="..\..\src\jlink_device.cpp" />
+    <ClCompile Include="..\..\src\jlink_mqtt_subscriber.cpp" />
+    <ClCompile Include="..\..\src\jlink_mqtt_subscriber_internal.cpp" />
+    <ClCompile Include="..\..\src\utils.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
