@@ -10,6 +10,8 @@ class GetPresetParams
 public:
     int Id;
     std::string PresetName;
+
+    GetPresetParams() : Id(0) { }
 };
 
 class GetPresetRequest

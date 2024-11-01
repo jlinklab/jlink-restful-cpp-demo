@@ -190,7 +190,7 @@
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\add_device\null_response.h" />
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_info_response.h" />
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_login_response.h" />
-    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_modifypassunlog_response.h" />
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_modify_pass_unlog_response.h" />
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\basic_param\device_get_camera_param_conf_response.h" />
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\basic_param\device_set_camera_param_conf_response.h" />
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\device_channel\device_get_chnnel_title_conf_response.h" />

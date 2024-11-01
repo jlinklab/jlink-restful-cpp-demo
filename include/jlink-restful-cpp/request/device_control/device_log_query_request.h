@@ -12,6 +12,8 @@ public:
     int LogPosition;
     std::string BeginTime;
     std::string EndTime;
+
+    LogQueryRequest() : LogPosition(0) { }
 };
 
 namespace nlohmann

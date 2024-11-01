@@ -10,6 +10,8 @@ class SnapRequest
 public:
     int Channel;
     int PicType;
+
+    SnapRequest() : Channel(0), PicType(0) { }
 };
 
 namespace nlohmann

@@ -16,6 +16,13 @@ public:
     std::string protocol;
     int download;
     int playPrioritize;
+
+    PlayBackAddressRequest()
+        : channel(0)
+        , streamType(0)
+        , download(0)
+        , playPrioritize(0)
+    { }
 };
 
 namespace nlohmann

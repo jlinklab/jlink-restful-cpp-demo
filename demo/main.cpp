@@ -1,11 +1,14 @@
 ﻿#include <fstream>
 #include "fmt/core.h"
-#include "tools.h"
 #include "request/request.h"
 #include "mqttmessage.h"
+#include "demo.h"
 
 int main()
 {
+#ifdef WIN32
+    system("chcp 65001");
+#endif
     Params params;
     getParams(params);
 
@@ -20,7 +23,8 @@ int main()
     JLinkDeveloper developer(&client, developerInfo);
     JLinkMqttSubscriber mqttsubscriber(developerInfo);
 
-    mainMenu(client, device, developer);
+    mainMenu(&client, &device, &developer);
+
 
 #if 0
     // mqtt订阅
@@ -55,7 +59,7 @@ int main()
     while (true) {
         Sleep(1000);
     }
-    
+
 #endif
 
     return 0;

@@ -137,9 +137,6 @@
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_login_response.h">
       <Filter>头文件\response\ams_user</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_modifypassunlog_response.h">
-      <Filter>头文件\response\ams_user</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\jlink-restful-cpp\message\device_add_report_message.h">
       <Filter>头文件\message</Filter>
     </ClInclude>
@@ -490,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\jlink-restful-cpp\response\device_config\net_basic\device_set_net_basic_conf_response.h">
       <Filter>头文件\response\device_config\net_basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\jlink-restful-cpp\response\ams_user\user_modify_pass_unlog_response.h">
+      <Filter>头文件\response\ams_user</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

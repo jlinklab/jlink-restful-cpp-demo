@@ -19,6 +19,20 @@ public:
     bool Alarm;
     bool General;
     bool Record;
+
+    RestoreFactorySettingRequest()
+        : Account(false)
+        , XMModeSwitch(false)
+        , Preview(false)
+        , NetServer(false)
+        , Encode(false)
+        , NetCommon(false)
+        , CameraPARAM(false)
+        , CommPtz(false)
+        , Alarm(false)
+        , General(false)
+        , Record(false)
+    { }
 };
 
 namespace nlohmann

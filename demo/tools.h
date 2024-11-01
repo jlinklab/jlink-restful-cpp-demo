@@ -6,8 +6,6 @@
 #include "jlink_mqtt_subscriber.h"
 #include "fmt/core.h"
 
-void mainMenu(JLinkClient& client, JLinkDevice& device, JLinkDeveloper& developer);
-
 /*
 说明：
 开发者参数获取自 (open.jftech.com)

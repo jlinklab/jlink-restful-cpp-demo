@@ -13,6 +13,12 @@ public:
     std::string FileType;
     int Month;
     int Year;
+
+    OPSCalendarRequest()
+        : Channel(0)
+        , Month(0)
+        , Year(0)
+    { }
 };
 
 namespace nlohmann

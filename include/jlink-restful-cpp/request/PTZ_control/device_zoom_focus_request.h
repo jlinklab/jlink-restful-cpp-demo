@@ -10,6 +10,8 @@ class ZoomFocusParams
 public:
     std::string Channel;
     int step;
+
+    ZoomFocusParams() : step(0) { }
 };
 
 class ZoomFocusRequest

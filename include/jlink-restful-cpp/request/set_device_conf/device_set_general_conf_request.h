@@ -19,12 +19,12 @@ public:
     std::string video_output;
 
     SetGeneralRequest()
-        : auto_logout(0),
-          font_size(0),
-          iran_calendar_enable(0),
-          local_no(0),
-          screen_auto_shutdown(0),
-          screen_savetime(0)
+        : auto_logout(0)
+        , font_size(0)
+        , iran_calendar_enable(0)
+        , local_no(0)
+        , screen_auto_shutdown(0)
+        , screen_savetime(0)
     { }
 };
 

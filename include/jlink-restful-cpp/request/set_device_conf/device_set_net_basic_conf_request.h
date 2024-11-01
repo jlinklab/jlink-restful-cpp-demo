@@ -23,13 +23,13 @@ public:
     bool UseHSDownLoad;
 
     NetCommonRequest()
-        : HttpPort(0),
-          MaxBps(0),
-          SSLPort(0),
-          TCPMaxConn(0),
-          TCPPort(0),
-          UDPPort(0),
-          UseHSDownLoad(false)
+        : HttpPort(0)
+        , MaxBps(0)
+        , SSLPort(0)
+        , TCPMaxConn(0)
+        , TCPPort(0)
+        , UDPPort(0)
+        , UseHSDownLoad(false)
     { }
 };
 

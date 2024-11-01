@@ -11,6 +11,9 @@ public:
     std::string action;
     int partno;
     int aerialno;
+
+    StorageFormatRequest() : partno(0), aerialno(0)
+    { }
 };
 
 namespace nlohmann

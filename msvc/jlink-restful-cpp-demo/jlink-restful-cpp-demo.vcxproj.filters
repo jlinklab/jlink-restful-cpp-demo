@@ -13,10 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\Language">
+      <UniqueIdentifier>{ca0c1ab4-d9a5-4cb5-bc41-0725742bc664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Public">
+      <UniqueIdentifier>{f3baa246-b350-4684-b38a-aa2e2a761413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Source">
+      <UniqueIdentifier>{24f0d1b1-91de-46a1-8c86-361bcffa7d01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\demo\config.ini">
       <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\build\demo\language_en.ini">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\demo\Language\language_cn.ini">
+      <Filter>源文件\Language</Filter>
+    </None>
+    <None Include="..\..\demo\Language\language_en.ini">
+      <Filter>源文件\Language</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +44,33 @@
     <ClCompile Include="..\..\demo\tools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\demo\Public\cJSON.cpp">
+      <Filter>源文件\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Public\OSString.cpp">
+      <Filter>源文件\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Public\XSDKTool.cpp">
+      <Filter>源文件\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Source\Demo.cpp">
+      <Filter>源文件\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Source\DeviceCapability.cpp">
+      <Filter>源文件\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Source\DeviceConf.cpp">
+      <Filter>源文件\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Source\DeviceInfo.cpp">
+      <Filter>源文件\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Source\DeviceStatuDemo.cpp">
+      <Filter>源文件\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demo\Source\DeviceUseraccount.cpp">
+      <Filter>源文件\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\demo\mqttmessage.h">
@@ -33,6 +78,18 @@
     </ClInclude>
     <ClInclude Include="..\..\demo\tools.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demo\Public\OSString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demo\Public\OSTypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demo\Public\XSDKTool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demo\Demo.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

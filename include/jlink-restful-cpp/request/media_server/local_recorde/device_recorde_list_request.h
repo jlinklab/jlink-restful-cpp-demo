@@ -15,6 +15,8 @@ public:
     std::string Event;
     std::string StreamType;
     std::string Type;
+
+    OPFileRequest() : Channel(0) { }
 };
 
 namespace nlohmann

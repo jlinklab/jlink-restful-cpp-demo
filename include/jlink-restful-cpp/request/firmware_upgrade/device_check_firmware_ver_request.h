@@ -16,6 +16,9 @@ public:
     int Manual;
     std::string SN;
     std::string UUID;
+
+    CheckFirmwareVerRequest() : Expect(0), Manual(0)
+    { }
 };
 
 namespace nlohmann

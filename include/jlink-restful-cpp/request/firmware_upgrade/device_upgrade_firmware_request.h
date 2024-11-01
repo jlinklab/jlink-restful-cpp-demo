@@ -12,6 +12,9 @@ public:
     std::string FileName;
     std::string Date;
     int FileSize;
+
+    UpgradeFirmwareParams() : FileSize(0)
+    { }
 };
 
 class UpgradeFirmwareRequest

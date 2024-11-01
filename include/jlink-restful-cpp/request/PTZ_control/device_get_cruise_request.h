@@ -11,6 +11,8 @@ public:
     int id;
     std::string Name;
     std::string Time;
+
+    GetCruiseParams() : id(0) { }
 };
 
 class GetCruiseRequest

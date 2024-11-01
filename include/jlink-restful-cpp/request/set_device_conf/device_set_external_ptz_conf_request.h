@@ -15,9 +15,9 @@ public:
     std::string ProtocolName;
 
     PTZDevice()
-        : DeviceNo(0), 
-          NumberInMatrixs(0),
-          PortNo(0)
+        : DeviceNo(0)
+        , NumberInMatrixs(0)
+        , PortNo(0)
     { }
 };
 

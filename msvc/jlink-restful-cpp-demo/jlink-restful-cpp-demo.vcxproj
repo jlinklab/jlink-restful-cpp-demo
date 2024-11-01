@@ -114,9 +114,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../include/jlink-restful-cpp;../../third/curl/include;../../third/fmt/include;../../third/openssl/include;../../third/mqtt/include;../../third/json;../../third;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/jlink-restful-cpp;../../third/curl/include;../../third/fmt/include;../../third/openssl/include;../../third/mqtt/include;../../third/json;../../third;../../demo/Public;../../demo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,14 +142,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\..\build\demo\language_en.ini" />
     <None Include="..\..\demo\config.ini" />
+    <None Include="..\..\demo\Language\language_cn.ini" />
+    <None Include="..\..\demo\Language\language_en.ini" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\demo\main.cpp" />
+    <ClCompile Include="..\..\demo\Public\cJSON.cpp" />
+    <ClCompile Include="..\..\demo\Public\OSString.cpp" />
+    <ClCompile Include="..\..\demo\Public\XSDKTool.cpp" />
+    <ClCompile Include="..\..\demo\Source\Demo.cpp" />
+    <ClCompile Include="..\..\demo\Source\DeviceCapability.cpp" />
+    <ClCompile Include="..\..\demo\Source\DeviceConf.cpp" />
+    <ClCompile Include="..\..\demo\Source\DeviceInfo.cpp" />
+    <ClCompile Include="..\..\demo\Source\DeviceStatuDemo.cpp" />
+    <ClCompile Include="..\..\demo\Source\DeviceUseraccount.cpp" />
     <ClCompile Include="..\..\demo\tools.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\demo\Demo.h" />
     <ClInclude Include="..\..\demo\mqttmessage.h" />
+    <ClInclude Include="..\..\demo\Public\OSString.h" />
+    <ClInclude Include="..\..\demo\Public\OSTypes.h" />
+    <ClInclude Include="..\..\demo\Public\XSDKTool.h" />
     <ClInclude Include="..\..\demo\tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
