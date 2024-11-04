@@ -37,6 +37,7 @@ This library is Open Source and is distributed under an MIT-like [license](./LIC
 
 ### Windows
 
+use `msvc/jlink-restful-cpp-demo/jlink-restful-cpp.sln`
 
 
 ### Linux
