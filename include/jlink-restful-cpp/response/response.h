@@ -50,6 +50,7 @@ struct adl_serializer<Response<T>>
 #include "response/get_systemability/device_blindcap_ability_response.h"
 #include "response/get_systemability/device_motion_area_ablity_response.h"
 #include "response/get_systemability/device_camera_parm_ablity_response.h"
+#include "response/get_systemability/device_decoder_pram_ablity_response.h"
 #include "response/get_systemability/device_talkaudio_format_ablity_response.h"
 #include "response/get_systemability/device_language_ability_response.h"
 #include "response/get_systemability/device_Intelligent_ability.h"

@@ -4,6 +4,7 @@
 */
 #include <assert.h>
 #include <chrono>
+#include <thread>
 #include "jlink_device.h"
 #include "jlink_client.h"
 #include "json/json.hpp"
@@ -11,6 +12,7 @@
 #include "const.h"
 #include "MQTTAsync.h"
 #include "MQTTClient.h"
+#include "utils.h"
 
 using namespace nlohmann;
 
@@ -795,9 +797,9 @@ DeviceUpgradeProgressResponse JLinkDevice::deviceUpgradeProgress()
 DeviceLiveStreamResponse JLinkDevice::deviceLiveStream(const LiveStreamRequest& liveStreamRequest)
 {
     json j;
+    j = liveStreamRequest;
     j["username"] = _dev_user_name;
     j["password"] = _dev_password;
-    j = liveStreamRequest;
 
     std::cout << j.dump() << std::endl;
 
@@ -1008,8 +1010,8 @@ DeviceAlarmRecordeResponse JLinkDevice::deviceAlarmRecorde(const AlarmRecordeReq
 DeviceVideoDetailByTimeResponse JLinkDevice::deviceVideoDetailByTime(const VideoDetailRequest& videoDetailRequest)
 {
     json j;
-    j["sn"] = _dev_sn;
     j = videoDetailRequest;
+    j["sn"] = _dev_sn;
 
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GET_ALARM_VIDEO_INFO_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
@@ -1033,6 +1035,20 @@ DeviceCloudStorageResponse JLinkDevice::deviceCloudStorage(std::string switchSta
 
     json j_resp = json::parse(resp);
     DeviceCloudStorageResponse response = j_resp;
+
+    return response;
+}
+
+DecoderPramAblity JLinkDevice::deviceGetDecodeAblity()
+{
+    json j;
+    j["Name"] = "DecoderPram";
+
+    std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
+    std::string resp = _client->request(url, j.dump());
+
+    json j_resp = json::parse(resp);
+    DecoderPramAblity response = j_resp;
 
     return response;
 }

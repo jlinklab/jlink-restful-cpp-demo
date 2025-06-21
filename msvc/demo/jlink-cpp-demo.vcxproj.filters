@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Public\OSString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Public\XSDKTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\Demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\DeviceCapability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\DeviceConf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\DeviceInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\DeviceStatuDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\DeviceUseraccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\Source\tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\demo\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{32515A79-4EAE-344C-989D-2833F7539B9B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
