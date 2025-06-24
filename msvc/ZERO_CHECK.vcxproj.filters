@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\build\CMakeFiles\139e9a1734a31969850176cd82b693fc\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{ADB649AD-7EED-3590-9152-B926AB15653F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

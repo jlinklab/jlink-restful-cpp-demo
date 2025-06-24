@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include <string>
 #include "response/response.h"
 #include "request/request.h"
@@ -104,7 +103,8 @@ public:
     DeviceRestartShutdownResponse deviceRestartShutdown(const RestartShutdownRequest& restartShutdown);
 
     // 恢复出厂设置
-    DeviceRestoreFactorySettingResponse deviceRestoreFactorySetting(const RestoreFactorySettingRequest& restoreFactorySetting);
+    DeviceRestoreFactorySettingResponse
+    deviceRestoreFactorySetting(const RestoreFactorySettingRequest& restoreFactorySetting);
 
     // 存储信息查询
     DeviceStorageInfoResponse deviceStorageInfo();
@@ -202,6 +202,9 @@ public:
     // 云存储视频录像开关
     DeviceCloudStorageResponse deviceCloudStorage(std::string switchState = "OFF");
 
+    // 获取解码能力
+    DecoderPramAblity deviceGetDecodeAblity();
+
 public:
     std::string _dev_token;
 
@@ -210,6 +213,4 @@ private:
     std::string _dev_sn;
     std::string _dev_user_name;
     std::string _dev_password;
-
-    
 };

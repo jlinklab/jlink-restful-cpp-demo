@@ -8,8 +8,8 @@
 class VideoTalkRequest
 {
 public:
+    std::string protocol;
     std::string channel;
-    std::string mediaType;
     std::string audioCodePlayer;
     std::string audioAccuracyPlayer;
     std::string videoPlayer;
@@ -26,17 +26,14 @@ struct adl_serializer<VideoTalkRequest>
 {
     static void to_json(json& j, const VideoTalkRequest& in)
     {
-        j = json{
-            {"channel", in.channel},
-            {"stream", in.mediaType},
-            {"audioCodePlayer", in.audioCodePlayer},
-            {"audioAccuracyPlayer", in.audioAccuracyPlayer},
-            {"videoPlayer", in.videoPlayer},
-            {"widthPlayer", in.widthPlayer},
-            {"heightPlayer", in.heightPlayer},
-            {"fpsPlayer", in.fpsPlayer},
-            {"audioKHZPlayer", in.audioKHZPlayer}
-        };
+        j = json{{"channel", in.channel},
+                 {"audioCodePlayer", in.audioCodePlayer},
+                 {"audioAccuracyPlayer", in.audioAccuracyPlayer},
+                 {"videoPlayer", in.videoPlayer},
+                 {"widthPlayer", in.widthPlayer},
+                 {"heightPlayer", in.heightPlayer},
+                 {"fpsPlayer", in.fpsPlayer},
+                 {"audioKHZPlayer", in.audioKHZPlayer}};
     }
 };
 } // namespace nlohmann

@@ -10,11 +10,6 @@ aux_source_directory(./Source SRC_Source)
 
 # 编译目标
 add_executable(${PROJECT_NAME} 
-	main.cpp
-	demo.h
-	mqttmessage.h
-	tools.cpp
-	tools.h
 	${SRC_Public}
 	${SRC_Source}
 )
@@ -26,10 +21,25 @@ target_include_directories(
     ../include
     ../include/jlink-restful-cpp
 	./Public
+	./Source
+	../third/imgui/include
 )
+
+target_link_directories(
+	${PROJECT_NAME} PUBLIC
+	../third/imgui/lib/windows
+	)
 
 # 目标依赖库
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
     jlink-restful-cpp
+    imgui_static
+    opengl32
+    dxgi
+    dxguid
+    d3d9
+    d3d10
+    d3d11
+    d3d12
 )

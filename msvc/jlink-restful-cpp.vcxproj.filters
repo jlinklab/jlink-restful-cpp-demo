@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\jlink_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\jlink_developer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\jlink_device.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\jlink_mqtt_subscriber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\jlink_mqtt_subscriber_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\const.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\jlink_mqtt_subscriber_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\developer_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\jlink_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\jlink_developer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\jlink_device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\jlink_mqtt_subscriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\mqtt_conn_options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\include\jlink-restful-cpp\mqtt_listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\project-other\project-jlink\jlink-restful-cpp-demo-1\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5722C4E5-C7ED-3EEC-9115-FBB2E83C6946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{32515A79-4EAE-344C-989D-2833F7539B9B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
