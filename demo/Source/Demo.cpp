@@ -72,7 +72,7 @@ int DeviceVideoTalkDemo()
     liveStreamRequest.protocol = "hls-ts";
     liveStreamRequest.videoCode = "h264";
     liveStreamRequest.audioCode = "aac";
-    liveStreamRequest.expireTime = "1751212800000";
+    //liveStreamRequest.expireTime = "1753891200000";  // 过期时间不填默认为10小时
 
     // 视频对讲流请求参数
     VideoTalkRequest videoTalkRequest;

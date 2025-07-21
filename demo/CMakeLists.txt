@@ -23,6 +23,10 @@ target_include_directories(
 	./Public
 	./Source
 	../third/imgui/include
+	../third/fmt/include
+	../third/curl/include
+	../third/mqtt/include
+	../third/openssl
 )
 
 target_link_directories(
