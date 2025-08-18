@@ -2,14 +2,20 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-#include <windows.h>
 #include "jlink_client.h"
 #include "jlink_device.h"
 #include "jlink_developer.h"
 #include "jlink_mqtt_subscriber.h"
 #include "fmt/core.h"
 #include "XSDKTool.h"
+
+#ifdef _WIN32
 #include "imgui/imgui.h"
+#include <windows.h>
+#else
+#include <unistd.h>
+#include <limits.h>
+#endif
 
 #define Language_Chinese "cn"
 #define Language_English "en"
@@ -121,6 +127,7 @@ int modifyUserPass(); // 修改密码
 // 生成主菜单
 void mainMenu(JLinkClient* client, JLinkDevice* device, JLinkDeveloper* developer);
 
+#ifdef _WIN32
 class VideoTalk : ImGui::IMWidget
 {
 public:
@@ -137,3 +144,4 @@ private:
     std::string _video_url;      // 设备实时视频的url
     std::string _video_talk_url; // 设备视频对讲的url
 };
+#endif
