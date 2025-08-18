@@ -30,16 +30,23 @@ target_link_directories(
 	../third/imgui/lib/windows
 	)
 
-# 目标依赖库
+
+
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
     jlink-restful-cpp
-    imgui_static
-    opengl32
-    dxgi
-    dxguid
-    d3d9
-    d3d10
-    d3d11
-    d3d12
 )
+
+if(WIN32)
+    target_link_libraries(
+        ${PROJECT_NAME} PUBLIC
+        imgui_static
+        opengl32
+        dxgi
+        dxguid
+        d3d9
+        d3d10
+        d3d11
+        d3d12
+    )
+endif()

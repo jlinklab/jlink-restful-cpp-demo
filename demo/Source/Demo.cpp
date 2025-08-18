@@ -1,26 +1,47 @@
 ﻿#include <thread>
-#include "imgui/imgui.h"
+#include <string>
 #include "Demo.h"
 
 std::string GetLanguagePath()
 {
+    std::string exePath;
+#ifdef _WIN32
     char path[MAX_PATH];
     GetModuleFileNameA(NULL, path, MAX_PATH);
-    std::string exePath = path;
-    return exePath.substr(0, exePath.find_last_of("\\/")) + '\\';
+
+    exePath = path;
+#else
+    char path[PATH_MAX];
+    ssize_t len = readlink("/proc/self/exe", path, sizeof(path) - 1);
+    if (len != -1) {
+        path[len] = '\0';
+        exePath = path;
+    }
+#endif
+
+    // 处理不同平台的路径分隔符
+    size_t lastSep = exePath.find_last_of("/\\");
+    if (lastSep != std::string::npos) {
+        return exePath.substr(0, lastSep + 1);
+    }
+    return "";
 }
 
 int ChoiceLanguage()
 {
     CMyFunctions myFuns(__FUNCTION__, "Backup");
-    myFuns.SetFunction("SelectedChinse");
+    myFuns.SetFunction("Change To Chinse");
     myFuns.SetFunction("Change To English");
 
     int nCmd = myFuns.ShowFuns() - 'a';
     std::string sLanguage[] = {Language_Chinese, Language_English};
     if (nCmd >= 0 && nCmd <= 1) {
         std::string path = GetLanguagePath();
+#ifdef _WIN32
         std::string finalPath = path + "Language\\";
+#elif __linux__
+        std::string finalPath = path + "Language/";
+#endif
         XLanguage::InitLanguage(finalPath.c_str(), sLanguage[nCmd].c_str());
     }
     return 0;
@@ -47,10 +68,13 @@ void mainMenu(JLinkClient* client, JLinkDevice* device, JLinkDeveloper* develope
     mainFuns.SetFunction("UserAccount", 'h', UserAccount);
     mainFuns.SetFunction("DeviceLogout", 'i', DeviceLogout);
     mainFuns.SetFunction("DeviceUnbind", 'j', DeviceUnbind);
+#ifdef _WIN32
     mainFuns.SetFunction("音视频对讲demo", 'k', DeviceVideoTalkDemo);
+#endif
     mainFuns.ShowFuns();
 }
 
+#ifdef _WIN32
 int DeviceVideoTalkDemo()
 {
     std::shared_ptr<VideoTalk> videoTalk = std::make_shared<VideoTalk>();
@@ -169,3 +193,4 @@ void VideoTalk::showWindow()
         ImGui::End();
     }
 }
+#endif
