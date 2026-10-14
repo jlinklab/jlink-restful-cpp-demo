@@ -1,4 +1,7 @@
-﻿#include <chrono>
+﻿#include <atomic>
+#include <chrono>
+#include <vector>
+#include <algorithm>
 #include "fmt/core.h"
 #include "openssl/md5.h"
 #include "openssl/evp.h"
@@ -9,22 +12,28 @@ namespace utils
 
 std::string getTimeStamp()
 {
-    static int i = 0;
-    if (++i >= 1000000) {
-        i = 1;
+    static std::atomic<int> i{0};
+    int n = ++i;
+    if (n >= 1000000) {
+        i.store(1);
     }
 
-    std::string prefix = fmt::format("{:07}", i);
+    std::string prefix = fmt::format("{:07}", n);
     auto t = std::chrono::system_clock::now().time_since_epoch();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(t).count();
 
     return fmt::format("{}{}", prefix, ms);
 }
 
-std::string getSignature(const DeveloperInfo& develop_info,
-                         const std::string& timestamp)
+std::string getSignature(const DeveloperInfo& develop_info, const std::string& timestamp)
 {
-    std::string data_0 = fmt::format("{}{}{}{}", develop_info.uuid, develop_info.app_key, develop_info.app_secret, timestamp);
+    if (develop_info.movecard <= 0) {
+        fmt::println("error: invalid movecard: {}", develop_info.movecard);
+        return "";
+    }
+
+    std::string data_0 =
+        fmt::format("{}{}{}{}", develop_info.uuid, develop_info.app_key, develop_info.app_secret, timestamp);
     std::string data_1 = data_0;
     size_t len = data_1.length();
     for (int i = 0; i < len; i++) {
@@ -54,25 +63,39 @@ std::string getSignature(const DeveloperInfo& develop_info,
 
 std::string AESEncode(const std::string& in, const DeveloperInfo& developer_info, const std::string& timestamp)
 {
-    std::string out;
+    if (in.empty()) {
+        return "";
+    }
+
     std::string key = timestamp.substr(timestamp.length() / 2);
     key += developer_info.app_secret;
     key = key.substr(0, 16);
-    
-    // key = "5234675401002cbf";
-    
+
     unsigned char* p_key = (unsigned char*)key.c_str();
     unsigned char* p_in = (unsigned char*)in.c_str();
-    unsigned char p_out[1024] = {};
-    int out_len = 1024;
-    
+    // 输出缓冲区按输入长度动态分配，避免固定栈缓冲区溢出
+    std::vector<unsigned char> out_buf(in.size() + EVP_MAX_BLOCK_LENGTH);
+    int out_len = 0;
+
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    EVP_EncryptInit(ctx, EVP_aes_128_ecb(), p_key, nullptr);
-    EVP_CIPHER_CTX_set_padding(ctx, EVP_PADDING_PKCS7);
-    EVP_EncryptUpdate(ctx, p_out, &out_len, p_in, (int)in.length());
-    out.append((char*)p_out, out_len);
-    EVP_EncryptFinal(ctx, p_out, &out_len);
-    out.append((char*)p_out, out_len);
+    if (!ctx) {
+        return "";
+    }
+
+    std::string out;
+    if (EVP_EncryptInit(ctx, EVP_aes_128_ecb(), p_key, nullptr) != 1 ||
+        EVP_EncryptUpdate(ctx, out_buf.data(), &out_len, p_in, (int)in.size()) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return "";
+    }
+    out.append((char*)out_buf.data(), out_len);
+
+    int final_len = 0;
+    if (EVP_EncryptFinal(ctx, out_buf.data(), &final_len) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return "";
+    }
+    out.append((char*)out_buf.data(), final_len);
     EVP_CIPHER_CTX_free(ctx);
 
     std::string hex;

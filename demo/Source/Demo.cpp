@@ -37,10 +37,11 @@ int ChoiceLanguage()
     std::string sLanguage[] = {Language_Chinese, Language_English};
     if (nCmd >= 0 && nCmd <= 1) {
         std::string path = GetLanguagePath();
+        std::string finalPath = path;
 #ifdef _WIN32
-        std::string finalPath = path + "Language\\";
-#elif __linux__
-        std::string finalPath = path + "Language/";
+        finalPath += "Language\\";
+#else
+        finalPath += "Language/";
 #endif
         XLanguage::InitLanguage(finalPath.c_str(), sLanguage[nCmd].c_str());
     }
@@ -54,7 +55,12 @@ void mainMenu(JLinkClient* client, JLinkDevice* device, JLinkDeveloper* develope
     g_developer = developer;
 
     std::string path = GetLanguagePath();
-    std::string finalPath = path + "\\Language\\";
+    std::string finalPath = path;
+#ifdef _WIN32
+    finalPath += "Language\\";
+#else
+    finalPath += "Language/";
+#endif
     XLanguage::InitLanguage(finalPath.c_str(), "cn");
     std::cout << "======操作前请先进行设备登录======" << std::endl;
     CMyFunctions mainFuns("MainMenu", "QuitApp");
@@ -75,19 +81,45 @@ void mainMenu(JLinkClient* client, JLinkDevice* device, JLinkDeveloper* develope
 }
 
 #ifdef _WIN32
+// 校验流地址：仅允许 http/https/rtmp/rtsp/rtsps 协议且不含 shell 元字符，
+// 避免 URL 拼接进 system() 后被 cmd 解析造成命令注入
+static bool isSafeStreamUrl(const std::string& url)
+{
+    static const char* schemes[] = {"http://", "https://", "rtmp://", "rtsp://", "rtsps://"};
+    bool scheme_ok = false;
+    for (auto s : schemes) {
+        if (url.rfind(s, 0) == 0) {
+            scheme_ok = true;
+            break;
+        }
+    }
+    if (!scheme_ok) {
+        return false;
+    }
+    return url.find_first_of("\"&|^<>%") == std::string::npos;
+}
+
 int DeviceVideoTalkDemo()
 {
     std::shared_ptr<VideoTalk> videoTalk = std::make_shared<VideoTalk>();
 
     DecoderPramAblity decoderPramAblity = g_device->deviceGetDecodeAblity();
-    std::string audioCodePlayer = decoderPramAblity.data.decoder_pram.audio[0].enc;
-    int audioAccuracyPlayer = decoderPramAblity.data.decoder_pram.audio[0].sb[0];
-    int audioKHZPlayer = decoderPramAblity.data.decoder_pram.audio[0].sr[0];
+    const DecoderPram& decoder_pram = decoderPramAblity.data.decoder_pram;
+    // 设备未返回解码能力时数组为空，下标访问前必须判空
+    if (decoder_pram.audio.empty() || decoder_pram.audio[0].sb.empty() || decoder_pram.audio[0].sr.empty() ||
+        decoder_pram.video.empty() || decoder_pram.video[0].res.empty()) {
+        std::cerr << "获取设备解码能力失败" << std::endl;
+        return -1;
+    }
 
-    std::string videoPlayer = decoderPramAblity.data.decoder_pram.video[0].enc;
-    int fpsPlayer = decoderPramAblity.data.decoder_pram.video[0].res[0].fps;
-    int widthPlayer = decoderPramAblity.data.decoder_pram.video[0].res[0].w;
-    int heightPlayer = decoderPramAblity.data.decoder_pram.video[0].res[0].h;
+    std::string audioCodePlayer = decoder_pram.audio[0].enc;
+    int audioAccuracyPlayer = decoder_pram.audio[0].sb[0];
+    int audioKHZPlayer = decoder_pram.audio[0].sr[0];
+
+    std::string videoPlayer = decoder_pram.video[0].enc;
+    int fpsPlayer = decoder_pram.video[0].res[0].fps;
+    int widthPlayer = decoder_pram.video[0].res[0].w;
+    int heightPlayer = decoder_pram.video[0].res[0].h;
 
     // 实时流请求参数
     LiveStreamRequest liveStreamRequest;
@@ -164,8 +196,12 @@ void VideoTalk::showWindow()
         ImGui::InputText("##url", video_buffer, sizeof(video_buffer));
 
         if (ImGui::Button("确定播放")) {
-            std::string cmd = fmt::format("ffplay.exe -x 480 -y 360 \"{}\"", video_buffer);
-            std::thread([=]() { system(cmd.c_str()); }).detach();
+            if (!isSafeStreamUrl(video_buffer)) {
+                std::cerr << "非法的视频流地址，已拒绝播放" << std::endl;
+            } else {
+                std::string cmd = fmt::format("ffplay.exe -x 480 -y 360 \"{}\"", video_buffer);
+                std::thread([=]() { system(cmd.c_str()); }).detach();
+            }
         }
 
         ImGui::Text("视频对讲流 URL：");
@@ -175,19 +211,23 @@ void VideoTalk::showWindow()
         ImGui::InputText("##url", video_talk_buffer, sizeof(video_talk_buffer));
 
         if (ImGui::Button("开始对讲")) {
-            std::string video_dev = "USB CAMERA";
-            std::string audio_dev = "立体声混音 (Realtek(R) Audio)";
-            std::string video_talk_url = video_talk_buffer;
+            if (!isSafeStreamUrl(video_talk_buffer)) {
+                std::cerr << "非法的对讲流地址，已拒绝推流" << std::endl;
+            } else {
+                std::string video_dev = "USB CAMERA";
+                std::string audio_dev = "立体声混音 (Realtek(R) Audio)";
+                std::string video_talk_url = video_talk_buffer;
 
-            std::string cmd = fmt::format("ffmpeg -f dshow -i video=\"{}\":audio=\"{}\" "
-                                          "-ac 1 -ar 8000 -c:a pcm_alaw "
-                                          "-c:v libx264 -preset ultrafast -tune zerolatency "
-                                          "-f flv \"{}\"",
-                                          video_dev,
-                                          audio_dev,
-                                          video_talk_url);
+                std::string cmd = fmt::format("ffmpeg -f dshow -i video=\"{}\":audio=\"{}\" "
+                                              "-ac 1 -ar 8000 -c:a pcm_alaw "
+                                              "-c:v libx264 -preset ultrafast -tune zerolatency "
+                                              "-f flv \"{}\"",
+                                              video_dev,
+                                              audio_dev,
+                                              video_talk_url);
 
-            std::thread([=]() { system(cmd.c_str()); }).detach();
+                std::thread([=]() { system(cmd.c_str()); }).detach();
+            }
         }
 
         ImGui::End();

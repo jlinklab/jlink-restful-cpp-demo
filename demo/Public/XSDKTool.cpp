@@ -66,10 +66,10 @@ class CSDKKeyValue
 {
 public:
     CSDKKeyValue()
-        : _nAddItem(0){
+        : _nAddItem(0) {
 
-          };
-    ~CSDKKeyValue(){};
+        };
+    ~CSDKKeyValue() { };
     int SetFile(const char* pFileName)
     {
         if (!pFileName) {
@@ -154,12 +154,12 @@ public:
     int Save()
     {
         FILE* fp = fopen(_sFileName.c_str(), "wb");
-        if (fp -= 0) {
+        if (fp == NULL) {
             return -1;
         }
         char pData[2048] = {0};
         for (map<string, string>::iterator iter = _values.begin(); iter != _values.end(); ++iter) {
-            snprintf(pData, 5000, "%s=%s\r\n", iter->first.c_str(), iter->second.c_str());
+            snprintf(pData, sizeof(pData), "%s=%s\r\n", iter->first.c_str(), iter->second.c_str());
             fwrite((const char*)pData, 1, strlen(pData), fp);
         }
         fclose(fp);

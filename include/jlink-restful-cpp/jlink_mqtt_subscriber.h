@@ -11,13 +11,17 @@ class JLinkMqttSubscriber
 public:
     JLinkMqttSubscriber(const DeveloperInfo& develop_info);
     ~JLinkMqttSubscriber();
-    
-     // 设置回调对象, 不负责释放
+
+    // 持有裸指针 _impl，禁止拷贝避免 double free
+    JLinkMqttSubscriber(const JLinkMqttSubscriber&) = delete;
+    JLinkMqttSubscriber& operator=(const JLinkMqttSubscriber&) = delete;
+
+    // 设置回调对象, 不负责释放
     int setCallback(MqttListener* listener);
-    
+
     // 连接(同步)
     int connect(const std::string& server_uri, const MqttConnectOptions& options);
-    
+
     // 订阅设备状态信息(服务端接入用)
     int subscribeDeviceStatus_server(const std::string& dev_token, int qos);
 
@@ -77,7 +81,7 @@ public:
 
     // 取消批量订阅透传消息通知
     int undeviceAlarmInfo_many(int qos);
-    
+
 private:
     JLinkMqttSubscriberInternal* _impl;
 };

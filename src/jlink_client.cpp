@@ -53,6 +53,7 @@ std::string JLinkClient::request(const std::string& url, const std::string& para
 
     CURLcode code = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
+    curl_slist_free_all(headers);
 
     if (code != CURLE_OK) {
         std::string err_msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(code));
@@ -100,13 +101,18 @@ std::string JLinkClient::requestAMS(const std::string& in_url, const std::string
     fmt::println("req: {}", param);
     CURLcode code = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
+    curl_slist_free_all(headers);
 
     if (code != CURLE_OK) {
         std::string err_msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(code));
         fmt::println("error: {}", err_msg);
     } else {
-        // url解码
-        response = curl_unescape(response.c_str(), (int)response.length());
+        // url解码(curl_unescape 返回新分配的缓冲区，拷贝后需释放)
+        char* decoded = curl_unescape(response.c_str(), (int)response.length());
+        if (decoded) {
+            response = decoded;
+            curl_free(decoded);
+        }
     }
 
     fmt::println("resp: {}", response);
@@ -151,13 +157,18 @@ std::string JLinkClient::requestAMS_userInfo(const std::string& in_url, const st
 
     CURLcode code = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
+    curl_slist_free_all(headers);
 
     if (code != CURLE_OK) {
         std::string err_msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(code));
         fmt::println("error: {}", err_msg);
     } else {
-        // url解码
-        response = curl_unescape(response.c_str(), (int)response.length());
+        // url解码(curl_unescape 返回新分配的缓冲区，拷贝后需释放)
+        char* decoded = curl_unescape(response.c_str(), (int)response.length());
+        if (decoded) {
+            response = decoded;
+            curl_free(decoded);
+        }
     }
 
     fmt::println("resp: {}", response);

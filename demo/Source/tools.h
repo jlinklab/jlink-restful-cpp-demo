@@ -17,7 +17,7 @@ typedef struct Params
     std::string _uuid;
     std::string _app_key;
     std::string _app_secret;
-    int _movecard;
+    int _movecard{};
     std::string _dev_sn;
     std::string _dev_user_name;
     std::string _dev_password;

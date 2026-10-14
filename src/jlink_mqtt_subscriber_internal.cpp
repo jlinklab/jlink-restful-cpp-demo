@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "openssl/rand.h"
 
+using nlohmann::json;
+
 void MQTTClient_connectionLost0(void* context, char* cause)
 {
     JLinkMqttSubscriberInternal* sub = (JLinkMqttSubscriberInternal*)context;
@@ -16,14 +18,19 @@ void MQTTClient_connectionLost0(void* context, char* cause)
 int MQTTClient_messageArrived0(void* context, char* topicName, int topicLen, MQTTClient_message* message)
 {
     JLinkMqttSubscriberInternal* sub = (JLinkMqttSubscriberInternal*)context;
-    if (sub) {
-        std::string topic = topicName;
+    if (sub && topicName) {
+        // topicLen > 0 时 topicName 不保证以 '\0' 结尾，必须按长度构造
+        std::string topic;
         if (topicLen > 0) {
-            topic = std::string(topicName, topicLen);
+            topic.assign(topicName, topicLen);
+        } else {
+            topic.assign(topicName);
         }
         sub->onMessageArrive(topic, message);
     }
 
+    MQTTClient_freeMessage(&message);
+    MQTTClient_free(topicName);
     return 1;
 }
 
@@ -34,7 +41,16 @@ JLinkMqttSubscriberInternal::JLinkMqttSubscriberInternal(const DeveloperInfo& de
 {
 }
 
-JLinkMqttSubscriberInternal::~JLinkMqttSubscriberInternal() { }
+JLinkMqttSubscriberInternal::~JLinkMqttSubscriberInternal()
+{
+    if (_client) {
+        if (MQTTClient_isConnected(_client)) {
+            MQTTClient_disconnect(_client, 1000);
+        }
+        MQTTClient_destroy(&_client);
+        _client = nullptr;
+    }
+}
 
 int JLinkMqttSubscriberInternal::setCallback(MqttListener* listener)
 {
@@ -44,6 +60,11 @@ int JLinkMqttSubscriberInternal::setCallback(MqttListener* listener)
 
 int JLinkMqttSubscriberInternal::connect(const std::string& server_uri, const MqttConnectOptions& options)
 {
+    if (_client) {
+        MQTTClient_destroy(&_client);
+        _client = nullptr;
+    }
+
     unsigned char rand[4] = {};
     RAND_bytes(rand, 4);
 
@@ -71,7 +92,9 @@ int JLinkMqttSubscriberInternal::connect(const std::string& server_uri, const Mq
     n_ret = MQTTClient_connect(_client, &opt);
     if (n_ret != MQTTCLIENT_SUCCESS) {
         const char* str = MQTTClient_strerror(n_ret);
-        fmt::println("mqtt client connect failed");
+        fmt::println("mqtt client connect failed: {}", str ? str : "");
+        MQTTClient_destroy(&_client);
+        _client = nullptr;
         return -2;
     }
 
@@ -99,7 +122,11 @@ int JLinkMqttSubscriberInternal::unsubscribeDeviceStatus_server(const std::strin
         return -11;
 
     std::string topic = fmt::format("{}/device/{}/status", _develop_info.uuid, dev_token);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -125,7 +152,11 @@ int JLinkMqttSubscriberInternal::unsubscribeDeviceStatus_client(const std::strin
         return -11;
 
     std::string topic = fmt::format("{}/device/{}/status", _develop_info.app_key, dev_token);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -142,7 +173,7 @@ int JLinkMqttSubscriberInternal::subscribeDeviceStatus_many(int qos)
         n_ret = -3;
     }
 
-    return 0;
+    return n_ret;
 }
 
 int JLinkMqttSubscriberInternal::unsubscribeDeviceStatus_many(int qos)
@@ -151,7 +182,11 @@ int JLinkMqttSubscriberInternal::unsubscribeDeviceStatus_many(int qos)
         return -11;
 
     std::string topic = fmt::format("{}/device/+/status", _develop_info.app_key);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -177,7 +212,11 @@ int JLinkMqttSubscriberInternal::undeviceInfoReport_server(const std::string& de
         return -11;
 
     std::string topic = fmt::format("{}/device/{}", _develop_info.uuid, dev_token);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -194,7 +233,7 @@ int JLinkMqttSubscriberInternal::deviceInfoReport_many(int qos)
         n_ret = -3;
     }
 
-    return 0;
+    return n_ret;
 }
 
 int JLinkMqttSubscriberInternal::undeviceInfoReport_many(int qos)
@@ -203,7 +242,11 @@ int JLinkMqttSubscriberInternal::undeviceInfoReport_many(int qos)
         return -11;
 
     std::string topic = fmt::format("{}/device/+", _develop_info.uuid);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -229,7 +272,11 @@ int JLinkMqttSubscriberInternal::undeviceAlarmInfo_server(const std::string& dev
         return -11;
 
     std::string topic = fmt::format("{}/device/{}/alarmEvent", _develop_info.uuid, dev_token);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -255,7 +302,11 @@ int JLinkMqttSubscriberInternal::undeviceAlarmInfo_client(const std::string& dev
         return -11;
 
     std::string topic = fmt::format("{}/device/{}/alarmEvent", _develop_info.app_key, dev_token);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -272,7 +323,7 @@ int JLinkMqttSubscriberInternal::deviceAlarmInfo_many(int qos)
         n_ret = -3;
     }
 
-    return 0;
+    return n_ret;
 }
 
 int JLinkMqttSubscriberInternal::undeviceAlarmInfo_many(int qos)
@@ -281,7 +332,11 @@ int JLinkMqttSubscriberInternal::undeviceAlarmInfo_many(int qos)
         return -11;
 
     std::string topic = fmt::format("{}/device/+/alarmEvent", _develop_info.uuid);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -307,7 +362,11 @@ int JLinkMqttSubscriberInternal::undevicePassThrough_server(const std::string& d
         return -11;
 
     std::string topic = fmt::format("{}/device/{}/req_dispatch", _develop_info.uuid, dev_token);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -324,7 +383,7 @@ int JLinkMqttSubscriberInternal::devicePassThrough_many(int qos)
         n_ret = -3;
     }
 
-    return 0;
+    return n_ret;
 }
 
 int JLinkMqttSubscriberInternal::undevicePassThrough_many(int qos)
@@ -333,7 +392,11 @@ int JLinkMqttSubscriberInternal::undevicePassThrough_many(int qos)
         return -11;
 
     std::string topic = fmt::format("{}/device/+/req_dispatch", _develop_info.uuid);
-    MQTTClient_unsubscribe(_client, topic.c_str());
+    int n_ret = MQTTClient_unsubscribe(_client, topic.c_str());
+    if (n_ret != MQTTCLIENT_SUCCESS) {
+        fmt::println("mqtt client unsubscribe failed");
+        return -3;
+    }
 
     return 0;
 }
@@ -356,18 +419,22 @@ int JLinkMqttSubscriberInternal::onMessageArrive(const std::string& topic, MQTTC
         return 0;
     }
 
-    json j = json::parse(data);
+    try {
+        json j = json::parse(data);
 
-    size_t pos = topic.rfind("/");
-    if (pos != std::string::npos && topic.substr(pos + 1) == "status") {
-        DeviceStatusMsg msg = j;
-        return _listener->onDeviceStatusMsg(msg);
-    } else if (pos != std::string::npos && topic.substr(pos + 1) == "alarmEvent") {
-        AlarmInfoMsg msg = j;
-        return _listener->onAlarmInfoMsg(msg);
-    } else if (pos != std::string::npos && topic.substr(pos + 1) == "req_dispatch") {
-        PassThroughMsg msg = j;
-        return _listener->onPassThroughMsg(msg);
+        size_t pos = topic.rfind("/");
+        if (pos != std::string::npos && topic.substr(pos + 1) == "status") {
+            DeviceStatusMsg msg = j;
+            return _listener->onDeviceStatusMsg(msg);
+        } else if (pos != std::string::npos && topic.substr(pos + 1) == "alarmEvent") {
+            AlarmInfoMsg msg = j;
+            return _listener->onAlarmInfoMsg(msg);
+        } else if (pos != std::string::npos && topic.substr(pos + 1) == "req_dispatch") {
+            PassThroughMsg msg = j;
+            return _listener->onPassThroughMsg(msg);
+        }
+    } catch (const std::exception& e) {
+        fmt::println("mqtt message dispatch failed: {}", e.what());
     }
 
     return 0;

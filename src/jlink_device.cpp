@@ -16,6 +16,20 @@
 
 using namespace nlohmann;
 
+// 安全解析网络响应: 网络失败/非JSON响应时返回带错误码的对象，避免抛出异常
+static json safeParse(const std::string& resp)
+{
+    try {
+        json j = json::parse(resp);
+        if (j.is_object()) {
+            return j;
+        }
+    } catch (const std::exception& e) {
+        fmt::println("parse response failed: {}", e.what());
+    }
+    return json{{"code", -1}, {"msg", "invalid response"}};
+}
+
 JLinkDevice::JLinkDevice(JLinkClient* client,
                          const std::string& dev_sn,
                          const std::string& dev_user_name,
@@ -51,7 +65,7 @@ DeviceBindResponse JLinkDevice::deviceBind(const std::string& type,
     std::string url = fmt::format("{}{}", GWP_URL, DEV_BIND_URL);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceBindResponse response = j_resp;
     return response;
 }
@@ -65,7 +79,7 @@ DeviceUnBindResponse JLinkDevice::deviceUnBind()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_UNBIND_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceUnBindResponse response = j_resp;
     return response;
 }
@@ -79,7 +93,7 @@ DeviceTokenResponse JLinkDevice::getDeviceToken()
     std::string url = fmt::format("{}{}", GWP_URL, DEV_TOKEN_URL);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
 
     DeviceTokenResponse response = j_resp;
     _dev_token = response.data.token;
@@ -95,7 +109,7 @@ DeviceStatusResponse JLinkDevice::getDeviceStatus()
     std::string url = fmt::format("{}{}", GWP_URL, DEV_STATUS_URL);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceStatusResponse response = j_resp;
     return response;
 }
@@ -110,7 +124,7 @@ DeviceLoginResponse JLinkDevice::deviceLogin()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_LOGIN_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceLoginResponse response = j_resp;
     return response;
 }
@@ -124,7 +138,7 @@ DeviceAliveResponse JLinkDevice::deviceAlive()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ALIVE_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceAliveResponse response = j_resp;
     return response;
 }
@@ -138,7 +152,7 @@ DeviceLogoutResponse JLinkDevice::deviceLogout()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_LOGOUT_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceLogoutResponse response = j_resp;
     return response;
 }
@@ -152,7 +166,7 @@ DeviceInfoResponse JLinkDevice::getSystemInfo()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETINFO_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceInfoResponse response = j_resp;
     return response;
 }
@@ -166,7 +180,7 @@ Device4GInfoResponse JLinkDevice::getDevice4GInfo()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETINFO_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     Device4GInfoResponse response = j_resp;
     return response;
 }
@@ -180,7 +194,7 @@ DeviceRTMPALLInfoRespone JLinkDevice::getDeviceRTMPALLInfo()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETINFO_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceRTMPALLInfoRespone response = j_resp;
     return response;
 }
@@ -194,7 +208,7 @@ DeviceBlindCapabilityResponse JLinkDevice::getDeviceBlindCapAbility()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceBlindCapabilityResponse response = j_resp;
     return response;
 }
@@ -208,7 +222,7 @@ DeviceMotionAreaResponse JLinkDevice::getDeviceMotionAreaAblity()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     std::string j_str = j_resp.dump();
 
     DeviceMotionAreaResponse response = j_resp;
@@ -224,7 +238,7 @@ DeviceCamerAblityResponse JLinkDevice::getDeviceCamerAblity()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceCamerAblityResponse response = j_resp;
     return response;
 }
@@ -238,7 +252,7 @@ DeviceTalkAudioAblity JLinkDevice::getDeviceTalkAudioAblity()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceTalkAudioAblity response = j_resp;
     return response;
 }
@@ -252,7 +266,7 @@ DeviceLanguageAblity JLinkDevice::getDeviceLanuageAbility()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceLanguageAblity response = j_resp;
     for (auto& it : response.data.multi_language) {
         std::cout << it << std::endl;
@@ -269,7 +283,7 @@ DeviceIntelligentAbilityResponse JLinkDevice::getDeviceIntelligentAbility()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceIntelligentAbilityResponse response = j_resp;
     return response;
 }
@@ -283,7 +297,7 @@ DeviceSupportExtRecordAbilityResponse JLinkDevice::getDeviceSupportExtRecordAbil
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSupportExtRecordAbilityResponse response = j_resp;
     return response;
 }
@@ -297,7 +311,7 @@ DeviceChnnelTitleConfResponse JLinkDevice::getDeviceChnnelTitleConf()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceChnnelTitleConfResponse response = j_resp;
     std::cout << "ChannelTitle Name: " << response.data.name << std::endl;
     return response;
@@ -315,7 +329,7 @@ DeviceSetChnnelTitleConfResponse JLinkDevice::setDeviceChnnelTitleConf(const Set
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_SETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSetChnnelTitleConfResponse response = j_resp;
     std::cout << "Set ChannelTitle Name: " << response.data.name << std::endl;
     return response;
@@ -330,7 +344,7 @@ DeviceExternalPTZConfResponse JLinkDevice::getDeviceExternalPTZ()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceExternalPTZConfResponse response = j_resp;
     std::cout << "PTZ Name: " << response.data.name << std::endl;
     return response;
@@ -346,7 +360,7 @@ DeviceSetExternalPTZConfResponse JLinkDevice::setDeviceExternalPTZ(const UartPTZ
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_SETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSetExternalPTZConfResponse response = j_resp;
     std::cout << "PTZ Name: " << response.data.name << std::endl;
     return response;
@@ -361,7 +375,7 @@ DeviceNetBasicConfResponse JLinkDevice::getDeviceNetBasicConf()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceNetBasicConfResponse response = j_resp;
     std::cout << "NetCommon SessionID: " << response.data.sessionID << std::endl;
     return response;
@@ -378,7 +392,7 @@ DeviceSetNetBasicConfResponse JLinkDevice::setDeviceNetBasicConf(const NetCommon
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_SETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSetNetBasicConfResponse response = j_resp;
     std::cout << "Set NetCommon SessionID: " << response.data.session_id << std::endl;
     return response;
@@ -393,7 +407,7 @@ DeviceGeneralConfResponse JLinkDevice::getDeviceGeneralConf()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceGeneralConfResponse response = j_resp;
     std::cout << "General SessionID: " << response.data.session_id << std::endl;
     return response;
@@ -409,7 +423,7 @@ DeviceSetGeneralConfResponse JLinkDevice::setDeviceGeneralConf(const SetGeneralR
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_SETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSetGeneralConfResponse response = j_resp;
     std::cout << "Set General SessionID: " << response.data.session_id << std::endl;
     return response;
@@ -424,7 +438,7 @@ DeviceCameraParamConfResponse JLinkDevice::getDeviceCameraParamConf()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceCameraParamConfResponse response = j_resp;
     std::cout << "Camera.Param SessionID: " << response.data.session_id << std::endl;
     return response;
@@ -440,7 +454,7 @@ DeviceSetCameraParamConfResponse JLinkDevice::setDeviceCameraParamConf(const Cam
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_SETCONF_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSetCameraParamConfResponse response = j_resp;
     std::cout << "Set Camera.Param SessionID: " << response.data.session_id << std::endl;
     return response;
@@ -456,7 +470,7 @@ DeviceRestartShutdownResponse JLinkDevice::deviceRestartShutdown(const RestartSh
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceRestartShutdownResponse response = j_resp;
 
     std::cout << "RestartShutdown SessionID: " << response.data.session_id << std::endl;
@@ -475,7 +489,7 @@ JLinkDevice::deviceRestoreFactorySetting(const RestoreFactorySettingRequest& res
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceRestoreFactorySettingResponse response = j_resp;
 
     std::cout << "RestoreFactorySetting SessionID: " << response.data.session_id << std::endl;
@@ -491,7 +505,7 @@ DeviceStorageInfoResponse JLinkDevice::deviceStorageInfo()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceStorageInfoResponse response = j_resp;
 
     std::cout << "StorageInfo SessionID: " << response.data.session_id << std::endl;
@@ -508,7 +522,7 @@ DeviceStorageFormatResponse JLinkDevice::deviceStorageFormat(const StorageFormat
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceStorageFormatResponse response = j_resp;
 
     std::cout << "StorageInfo SessionID: " << response.data.session_id << std::endl;
@@ -528,7 +542,7 @@ DeviceOPLogQueryResponse JLinkDevice::deviceOPLogQuery(const LogQueryRequest& lo
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceOPLogQueryResponse response = j_resp;
 
     std::cout << "OPLogQuery SessionID: " << response.data.session_id << std::endl;
@@ -547,7 +561,7 @@ DeviceClearLogResponse JLinkDevice::deviceClearLog()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceClearLogResponse response = j_resp;
 
     std::cout << "RemoveAll SessionID: " << response.data.session_id << std::endl;
@@ -563,7 +577,7 @@ DeviceSystemTimeResponse JLinkDevice::deviceSystemTime()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSystemTimeResponse response = j_resp;
 
     std::cout << "RemoveAll SessionID: " << response.data.session_id << std::endl;
@@ -580,7 +594,7 @@ DeviceSynSystemTimeResponse JLinkDevice::deviceSynSystemTime(const SynSystemTime
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSynSystemTimeResponse response = j_resp;
 
     std::cout << "OPTimeSetting SessionID: " << response.data.session_id << std::endl;
@@ -597,7 +611,7 @@ DeviceSynUTCResponse JLinkDevice::deviceSynUTC(const SynUTCRequest& synUTCReques
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSynUTCResponse response = j_resp;
 
     std::cout << "OPUTCTimeSetting SessionID: " << response.data.session_id << std::endl;
@@ -614,7 +628,7 @@ DeviceOpenCloseTransResponse JLinkDevice::deviceDeviceOpenCloseTrans(const OpenC
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceOpenCloseTransResponse response = j_resp;
 
     std::cout << "OPTrans SessionID: " << response.data.session_id << std::endl;
@@ -632,7 +646,7 @@ JLinkDevice::deviceCustomProtocol(const CustomProtocolRequest& customProtocolReq
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceCustomProtocolResponse response = j_resp;
 
     std::cout << "CustomProtocol SessionID: " << response.data.session_id << std::endl;
@@ -650,7 +664,7 @@ JLinkDevice::deviceDirectionControl(const DirectionControlRequest& directionCont
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceDirectionControlResponse response = j_resp;
 
     std::cout << "DirectionControl SessionID: " << response.data.session_id << std::endl;
@@ -667,7 +681,7 @@ DevicePTZPreSetResponse JLinkDevice::devicePTZPreSet(const SetPresetRequest& set
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DevicePTZPreSetResponse response = j_resp;
 
     std::cout << "PreSet SessionID: " << response.data.session_id << std::endl;
@@ -684,7 +698,7 @@ DeviceZoomFocusResponse JLinkDevice::deviceZoomFocus(const ZoomFocusRequest& zoo
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceZoomFocusResponse response = j_resp;
 
     std::cout << "ZoomFocus SessionID: " << response.data.session_id << std::endl;
@@ -702,7 +716,7 @@ DevicePointCruiseResponse JLinkDevice::devicePointCruise(const PointCruiseReques
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DevicePointCruiseResponse response = j_resp;
 
     std::cout << "PointCruise SessionID: " << response.data.session_id << std::endl;
@@ -719,7 +733,7 @@ DeviceGetPTZPreSetConfResponse JLinkDevice::deviceGetPTZPreSetConf(const GetPres
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceGetPTZPreSetConfResponse response = j_resp;
 
     std::cout << "GetPTZPreSetConf SessionID: " << response.data.session_id << std::endl;
@@ -735,7 +749,7 @@ DeviceGetCruiseConfResponse JLinkDevice::deviceGetCruiseConf(const GetCruiseRequ
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceGetCruiseConfResponse response = j_resp;
 
     std::cout << "GetCruiseConf SessionID: " << response.data.session_id << std::endl;
@@ -752,7 +766,7 @@ DeviceFirmVersionResponse JLinkDevice::deviceFirmVersion(const CheckFirmwareVerR
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceFirmVersionResponse response = j_resp;
 
     std::cout << "FirmVersion SessionID: " << response.data.session_id << std::endl;
@@ -769,7 +783,7 @@ DeviceUpgradeFirmwareResponse JLinkDevice::deviceUpgradeFirmware(const UpgradeFi
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceUpgradeFirmwareResponse response = j_resp;
 
     std::cout << "upgradeFirmware SessionID: " << response.data.session_id << std::endl;
@@ -786,7 +800,7 @@ DeviceUpgradeProgressResponse JLinkDevice::deviceUpgradeProgress()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceUpgradeProgressResponse response = j_resp;
 
     std::cout << "UpgradeFirmware SessionID: " << response.data.session_id << std::endl;
@@ -806,7 +820,7 @@ DeviceLiveStreamResponse JLinkDevice::deviceLiveStream(const LiveStreamRequest& 
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_LIVESTREAM_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceLiveStreamResponse response = j_resp;
 
     std::cout << "LiveStream Ret: " << response.data.ret << std::endl;
@@ -824,7 +838,7 @@ DeviceCloseLiveStreamResponse JLinkDevice::deviceCloseLiveStream(const CloseLive
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_CLOSE_LIVESTREAM_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceCloseLiveStreamResponse response = j_resp;
 
     std::cout << "Close LiveStream Ret: "
@@ -843,7 +857,7 @@ DeviceTalkBackResponse JLinkDevice::deviceTalkBack(const TalkBackRequest& talkBa
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_TALKBACK_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceTalkBackResponse response = j_resp;
 
     std::cout << "TalkBack Ret: " << response.data.ret << std::endl;
@@ -861,7 +875,7 @@ DeviceVideotalkResponse JLinkDevice::deviceVideotalk(const VideoTalkRequest& vid
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_VEDIOTALK_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceVideotalkResponse response = j_resp;
 
     std::cout << "Videotalk Ret: " << response.data.ret << std::endl;
@@ -879,7 +893,7 @@ DeviceSnapResponse JLinkDevice::deviceSnap(const SnapRequest& snapRequest, std::
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_CAPTURE_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSnapResponse response = j_resp;
 
     std::cout << "Snap Ret: " << response.data.ret << std::endl;
@@ -895,7 +909,7 @@ DeviceConnectNumResponse JLinkDevice::deviceConnectNum()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GET_PULL_STREAM_CONNECTIONS_COUNT_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceConnectNumResponse response = j_resp;
 
     std::cout << "ConnectNum Sum: " << response.data.sum << std::endl;
@@ -912,7 +926,7 @@ DeviceOPFileQueryResponse JLinkDevice::deviceOPFileQuery(const OPFileRequest& op
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_OPDEV_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceOPFileQueryResponse response = j_resp;
 
     std::cout << "filelist sessionid: " << response.data.session_id << std::endl;
@@ -930,7 +944,7 @@ DevicePlayBackAddressResponse JLinkDevice::devicePlayBackAddress(const PlayBackA
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_PLAYBACK_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DevicePlayBackAddressResponse response = j_resp;
 
     std::cout << "PlayBackAddress url: " << response.data.url << std::endl;
@@ -947,7 +961,7 @@ DeviceSwitchStreamResponse JLinkDevice::deviceSwitchStream(const int streamType)
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_CARD_VIDEO_SWITCHS_TREAM_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceSwitchStreamResponse response = j_resp;
 
     std::cout << "SwitchStream Ret: " << response.data.ret << std::endl;
@@ -965,7 +979,7 @@ DeviceOPSCalendarResponse JLinkDevice::deviceOPSCalendar(const OPSCalendarReques
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_CARD_PLAYBACK_CALENDAR_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceOPSCalendarResponse response = j_resp;
 
     std::cout << "OPSCalendar Ret: " << response.data.ret << std::endl;
@@ -982,7 +996,7 @@ DeviceCloudStorageAlarmVideoResponse JLinkDevice::deviceCloudStorageAlarmVideo(c
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETVIDEOLIST_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceCloudStorageAlarmVideoResponse response = j_resp;
 
     std::cout << "CloudStorageAlarmVideo Ret: " << response.data.ret << std::endl;
@@ -999,7 +1013,7 @@ DeviceAlarmRecordeResponse JLinkDevice::deviceAlarmRecorde(const AlarmRecordeReq
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GETVIDEO_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceAlarmRecordeResponse response = j_resp;
 
     std::cout << "AlarmRecorde Ret: " << response.data.ret << std::endl;
@@ -1016,7 +1030,7 @@ DeviceVideoDetailByTimeResponse JLinkDevice::deviceVideoDetailByTime(const Video
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_GET_ALARM_VIDEO_INFO_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceVideoDetailByTimeResponse response = j_resp;
 
     std::cout << "VideoDetailByTime msg: " << response.data.msg << std::endl;
@@ -1033,7 +1047,7 @@ DeviceCloudStorageResponse JLinkDevice::deviceCloudStorage(std::string switchSta
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_CLOUD_VIDEO_RECORDING_SWITCH_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DeviceCloudStorageResponse response = j_resp;
 
     return response;
@@ -1047,7 +1061,7 @@ DecoderPramAblity JLinkDevice::deviceGetDecodeAblity()
     std::string url = fmt::format("{}{}/{}", GWP_URL, DEV_ABILITY_URL, _dev_token);
     std::string resp = _client->request(url, j.dump());
 
-    json j_resp = json::parse(resp);
+    json j_resp = safeParse(resp);
     DecoderPramAblity response = j_resp;
 
     return response;

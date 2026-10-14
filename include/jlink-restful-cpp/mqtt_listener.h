@@ -5,7 +5,7 @@
 class MqttListener
 {
 public:
-    ~MqttListener() { }
+    virtual ~MqttListener() = default;
 
     // 连接丢失
     virtual int onConnectLost(const std::string reason) = 0;

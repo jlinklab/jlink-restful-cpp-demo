@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <exception>
 #include <list>
 #include <vector>
 #include <string>
@@ -9,9 +10,9 @@ template <typename T>
 class Response
 {
 public:
-    int code;
+    int code{};
     std::string msg;
-    T data;
+    T data{};
 };
 
 namespace nlohmann
@@ -21,17 +22,26 @@ struct adl_serializer<Response<T>>
 {
     static void from_json(const json& j, Response<T>& out)
     {
-        out.code = j.value("code", 404);
-        if (j.contains("msg")) {
-            out.msg = j.value("msg", "Not Found");
-        } else if (j.contains("error_msg")) {
-            out.msg = j.value("error_msg", "Not Found");
-        } else {
-            out.msg = "Not Found";
-        }
+        try {
+            out.code = j.value("code", 404);
+            if (j.contains("msg")) {
+                out.msg = j.value("msg", "Not Found");
+            } else if (j.contains("error_msg")) {
+                out.msg = j.value("error_msg", "Not Found");
+            } else {
+                out.msg = "Not Found";
+            }
 
-        if (j.contains("data")) {
-            out.data = j["data"];
+            if (j.contains("data")) {
+                out.data = j["data"];
+            } else {
+                out.data = T{};
+            }
+        } catch (const std::exception&) {
+            // 响应字段类型不匹配时不抛出异常，返回错误码
+            out.code = -1;
+            out.msg = "invalid response";
+            out.data = T{};
         }
     }
 };
